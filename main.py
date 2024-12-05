@@ -1,17 +1,29 @@
+from fastapi import FastAPI 
+from fastapi.responses import RedirectResponse
+
 from models.Networth_Printer import Networth_Printer
+from database.db import engine , Base
+
+app = FastAPI()
+app.title = "Impresoras Server API"
+app.description = "API para la gestión de impresoras en red"
+
+## add_middleware
+from middlewares.Error_handler import ErrorHandler
+app.add_middleware(ErrorHandler)
+
+## Import routers
+from models.Impresoras.router import printer_router
+app.include_router(printer_router)
 
 
-def main():
-    network = "192.168.1.0/24"  
-    target_port = 9100
-    timeout = 1 
+# Crear la base de datos 
+Base.metadata.create_all(bind=engine)
 
-    network_printer = Networth_Printer(network, target_port, timeout)
-    printers = network_printer.search_printer()
 
-    print("Impresoras encontradas:")
-    for printer in printers:
-        print(printer)
-
-if __name__ == "__main__":
-    main()
+@app.get("/" , tags=["Root"])
+def read_root():
+    """
+    Este endpoint redirige a la documentación de la API
+    """
+    return RedirectResponse(url="/docs")
