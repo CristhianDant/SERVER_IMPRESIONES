@@ -4,20 +4,20 @@ from fastapi.security import HTTPBearer
 from fastapi.security.http import HTTPAuthorizationCredentials
 
 
-#from utils.jwt_tocken import validate_token
+from utils.jwt_tocken import validate_token
 
 
 
-# class JWTBearer(HTTPBearer):
-#     async def __call__(self, request: Request):
+class JWTBearer(HTTPBearer):
+    async def __call__(self, request: Request):
 
-#         auth = await super().__call__(request)
-#         data = validate_token(auth.credentials)
+        auth = await super().__call__(request)
+        data = validate_token(auth.credentials)
         
         
-#         if data is None:
-#             raise HTTPException(status_code=403, detail="Invalid token or expired token")
+        if data is None:
+            raise HTTPException(status_code=403, detail="Invalid token or expired token")
 
-#         return data
+        return data
 
 

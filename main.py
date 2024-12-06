@@ -16,6 +16,8 @@ app.add_middleware(ErrorHandler)
 from models.Impresoras.router import printer_router
 app.include_router(printer_router)
 
+from models.Impresion.router import router_impresion
+app.include_router(router_impresion)
 
 # Crear la base de datos 
 Base.metadata.create_all(bind=engine)
