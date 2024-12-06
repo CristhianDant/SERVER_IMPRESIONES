@@ -5,7 +5,8 @@ from typing import Dict, Any
 
 from fastapi.responses import JSONResponse
 from middlewares.JWT_bearer import JWTBearer
-from .ImpresionPedidoSchema import ImpresionPedidoSchema
+
+from .tiketera.pedidos import Pedidos_Tiketera
 
 
 router_impresion = APIRouter()
@@ -30,8 +31,10 @@ def get_impresiones_pedido(body: Dict[str, Any] = Body(...)):
     ip = body.get('ip')
     data = body.get('data')
 
+    result = Pedidos_Tiketera.impresion(ip, data)
+
     return JSONResponse(
         status_code=status.HTTP_200_OK,
-        content={"message": f"Impresiones de {ip} con data {data}"}
+        content=result
     )
     
