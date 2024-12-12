@@ -1,5 +1,5 @@
 from models.Networth_Printer import Networth_Printer
-from .model import Printer
+from .model import Printer_database
 
 
 class PrinterService:
@@ -19,16 +19,20 @@ class PrinterService:
         for printer in printers:
             printer['activo'] = True
             printer['tipo'] = 'TICKET'
-            self.db.add(Printer(**printer))
+            self.db.add(Printer_database(**printer))
 
         self.db.commit()
         
 
     def get_printers(self):
-        return self.db.query(Printer).all()
+        result = self.db.query(Printer_database).all()
+        return result
     
     def get_printer(self, id):
-        return self.db.query(Printer).filter(Printer.id == id).first()
+        return self.db.query(Printer_database).filter(Printer_database.id == id).first()
+    
+
+    
     
     
 

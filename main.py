@@ -1,3 +1,6 @@
+# env 
+# SECRET_KEY = 'your_secret_key'
+
 from fastapi import FastAPI 
 from fastapi.responses import RedirectResponse
 
@@ -22,6 +25,7 @@ app.include_router(router_impresion)
 # Crear la base de datos 
 Base.metadata.create_all(bind=engine)
 
+SECRET_KEY = 'your_secret_key'
 
 @app.get("/" , tags=["Root"])
 def read_root():

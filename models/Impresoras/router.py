@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Body , Depends , Path , Query , status
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 from database.db import Session
-from .model import Printer
+from .model import Printer_database
 from .servise import PrinterService
 
 # Crear un router
@@ -20,7 +21,7 @@ def get_printers():
     result = PrinterService(db).get_printers()
     return JSONResponse(
         status_code=status.HTTP_200_OK,
-        content=result
+        content=jsonable_encoder(result)
     )
     
 
@@ -49,7 +50,7 @@ def get_printer(id: int = Path(..., title="ID de la impresora")):
     result = PrinterService(db).get_printer(id)
     return JSONResponse(
         status_code=status.HTTP_200_OK,
-        content=result
+        content=jsonable_encoder(result)    
     )
 
     

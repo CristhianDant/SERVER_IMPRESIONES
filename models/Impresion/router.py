@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter, Body , Depends , Path , Query , status
 from pydantic import BaseModel
 from typing import Dict, Any
@@ -7,6 +6,7 @@ from fastapi.responses import JSONResponse
 from middlewares.JWT_bearer import JWTBearer
 
 from .tiketera.pedidos import Pedidos_Tiketera
+from .tiketera.caja import Caja_Tiketera
 
 
 router_impresion = APIRouter()
@@ -25,7 +25,7 @@ def get_impresiones():
 @router_impresion.post("/impresion_pedido/" , tags=['Impresiones'] ,status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
 def get_impresiones_pedido(body: Dict[str, Any] = Body(...)):
     """
-    Listar todas las impresiones
+    Generar la impresion de pedidos
     """
     
     ip = body.get('ip')
@@ -38,3 +38,20 @@ def get_impresiones_pedido(body: Dict[str, Any] = Body(...)):
         content=result
     )
     
+
+@router_impresion.post('/impresion_caja/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+def get_impresiones_caja(boby :Dict[str , Any ] = Body(...)):
+    """
+    Generar la impresion de caja     
+    """ 
+
+    ip = boby.get('ip')
+    data = boby.get('data')
+
+    result = Caja_Tiketera.impresion(ip=ip , data = data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=result
+    )
+
