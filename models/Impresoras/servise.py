@@ -31,6 +31,19 @@ class PrinterService:
     def get_printer(self, id):
         return self.db.query(Printer_database).filter(Printer_database.id == id).first()
     
+    def update_name_printer(self, id: int, name: str):
+        printer = self.get_printer(id)
+        if not printer:
+            return None
+        printer.name_printer = name
+        self.db.commit()
+        print(printer)
+        return {
+            "message": "Nombre de impresora actualizado",
+            "id": printer.id,
+            "name": printer.name_printer
+        }
+    
 
     
     
