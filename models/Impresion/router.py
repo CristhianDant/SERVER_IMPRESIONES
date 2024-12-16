@@ -7,6 +7,8 @@ from middlewares.JWT_bearer import JWTBearer
 
 from .tiketera.pedidos import Pedidos_Tiketera
 from .tiketera.caja import Caja_Tiketera
+from .tiketera.factura import Factura_Tiketera
+from .tiketera.devolucion import Devolucion_Tiketera
 
 
 router_impresion = APIRouter()
@@ -55,3 +57,34 @@ def get_impresiones_caja(boby :Dict[str , Any ] = Body(...)):
         content=result
     )
 
+@router_impresion.post('/impresion_factura/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+def get_impresiones_factura(boby :Dict[str , Any ] = Body(...)):
+    """
+    Generar la impresion de factura
+    """ 
+
+    ip = boby.get('ip')
+    data = boby.get('data')
+
+    result = Factura_Tiketera.impresion(ip=ip , data = data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=result
+    )
+
+@router_impresion.post('/impresion_devolucino/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+def get_impresiones_devolucion(boby :Dict[str , Any ] = Body(...)):
+    """
+    Generar la impresion de devolucion
+    """ 
+
+    ip = boby.get('ip')
+    data = boby.get('data')
+
+    result = Devolucion_Tiketera.impresion(ip=ip , data = data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=result
+    )
