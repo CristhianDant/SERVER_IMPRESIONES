@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      - ssh
+
+  ssh:
+    image: rastasheep/ubuntu-sshd:18.04
+    container_name: ssh_server
+    ports:
+      - "2222:22"
+    environment:
+      - ROOT_PASSWORD=root
+
+## ssh -L 5050:localhost:5050 usuario@ip_del_servidor_local -p 2222
