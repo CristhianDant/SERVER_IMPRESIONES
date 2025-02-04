@@ -33,3 +33,9 @@ def read_root():
     Este endpoint redirige a la documentación de la API
     """
     return RedirectResponse(url="/docs")
+
+
+"""
+Para la ejecucion de este servidor se usa uvicorn
+uvicorn main:app --host 0.0.0.0 --port 8080 --reload 
+"""
