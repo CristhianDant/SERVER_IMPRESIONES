@@ -1,6 +1,9 @@
 # Virtual Environments
 .env
 
+# pycharm
+.idea/
+
 # Database
 *.sqlite
 
