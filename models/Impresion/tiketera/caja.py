@@ -11,6 +11,7 @@ class Caja_Tiketera:
     
     def impresion(ip: str, data: dict) -> str:
         try:
+            data= data['movimiento']
             
             kitchen = Network(f'{ip}')
 
