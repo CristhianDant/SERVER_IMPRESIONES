@@ -37,7 +37,7 @@ class Pedidos_Tiketera:
             try:
                 for det in detalle:
                     cod = str(det['ARTICULO_V2']['CODIGO'])
-                    cantidad = str(det['CANTIDAD'])
+                    cantidad = str(int(det['CANTIDAD']))
                     text_det = Pedidos_Tiketera.formatear_texto(cod, cantidad=cantidad)
                     kitchen.text(f'{str(text_det)}\n')
             except Exception as e:

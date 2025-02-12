@@ -43,7 +43,7 @@ class Caja_Tiketera:
             Caja_Tiketera.imprimir_guiones(kitchen)
 
             kitchen.text(f'CHEQUE: {monto_cheque}\n')
-            kitchen.text(f'DEPÓSITO: {monto_deposito}\n')
+            kitchen.text(f'DEPOSITO: {monto_deposito}\n')
             kitchen.text(f'EFECTIVO: {monto_efectivo}\n')
             kitchen.text(f'TRANSFERENCIA: {monto_transferencia}\n')
 
