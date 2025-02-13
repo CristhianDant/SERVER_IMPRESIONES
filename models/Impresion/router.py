@@ -9,6 +9,7 @@ from .tiketera.pedidos import Pedidos_Tiketera
 from .tiketera.caja import Caja_Tiketera
 from .tiketera.factura import Factura_Tiketera
 from .tiketera.devolucion import Devolucion_Tiketera
+from .tiketera.guia_interna_amp import GuiaInternaAmp
 
 
 router_impresion = APIRouter()
@@ -83,6 +84,22 @@ def get_impresiones_devolucion(boby :Dict[str , Any ] = Body(...)):
     data = boby.get('data')
 
     result = Devolucion_Tiketera.impresion(ip=ip , data = data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=result
+    )
+
+@router_impresion.post('/impresion_guia_interna_amp/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+def get_impresiones_guia_interna_amp(boby :Dict[str , Any ] = Body(...)):
+    """
+    Generar la impresion de guia interna amp
+    """
+
+    ip = boby.get('ip')
+    data = boby.get('data')
+
+    result = GuiaInternaAmp.impresion(ip=ip , data = data)
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
