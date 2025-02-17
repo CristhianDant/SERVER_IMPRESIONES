@@ -11,7 +11,7 @@ from .tiketera.factura import Factura_Tiketera
 from .tiketera.devolucion import Devolucion_Tiketera
 from .tiketera.guia_interna_amp import GuiaInternaAmp
 from .tiketera.compra_apt import Compra_apt
-
+from .tiketera.producion_acabado import Acabado_Producion
 
 router_impresion = APIRouter()
 
@@ -107,7 +107,7 @@ def get_impresiones_guia_interna_amp(boby :Dict[str , Any ] = Body(...)):
         content=result
     )
 
-@router_impresion.post('/compra_apt/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+@router_impresion.post('/impresion_compras_apt/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
 def get_impresiones_compra_apt(boby :Dict[str , Any ] = Body(...)):
     """
     Generar la impresion de compra apt
@@ -117,6 +117,23 @@ def get_impresiones_compra_apt(boby :Dict[str , Any ] = Body(...)):
     data = boby.get('data')
 
     result = Compra_apt.impresion(ip=ip, data = data)
+
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content=result
+    )
+
+
+@router_impresion.post('/imprimir_produccion_acabado/' , tags=['Impresiones'] , status_code=status.HTTP_200_OK , dependencies=[Depends(JWTBearer())])
+def get_impresiones_produccion_acabado(boby :Dict[str , Any ] = Body(...)):
+    """
+    Generar la impresion de produccion acabado
+    """
+
+    ip = boby.get('ip')
+    data = boby.get('data')
+
+    result = Acabado_Producion.impresion(ip=ip, data = data)
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
