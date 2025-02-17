@@ -1,6 +1,6 @@
 from escpos.printer import Network
 
-class GuiaInternaAmp():
+class Compra_apt():
     '''
     Clase para la impresión de guias internas de AMP
     '''
@@ -24,7 +24,7 @@ class GuiaInternaAmp():
             kitchen.text("Productos Terminados\n")
             kitchen.text(" \n")
 
-            GuiaInternaAmp.imprimir_guiones(kitchen)
+            Compra_apt.imprimir_guiones(kitchen)
 
             NROSERIE = str(encabezado['NROSERIE'])
             NRODOC = str(encabezado['NRODOC'])
@@ -39,11 +39,11 @@ class GuiaInternaAmp():
             TIPO_COMPRA = str(encabezado['TIPODOC'])
             kitchen.text("FPAGO: " + TIPO_COMPRA + "\n")
 
-            GuiaInternaAmp.imprimir_guiones(kitchen)
+            Compra_apt.imprimir_guiones(kitchen)
 
             kitchen.text("INSUMO               CANTIDAD\n")
 
-            GuiaInternaAmp.imprimir_guiones(kitchen)
+            Compra_apt.imprimir_guiones(kitchen)
 
             for det in detalle:
                 art = det[('ARTICULO_V2')]['DESCRIPCION_ARTICULO']
@@ -55,7 +55,7 @@ class GuiaInternaAmp():
 
             for resp in lista:
                 kitchen.text(f"{resp}:\n")
-                GuiaInternaAmp.imprimir_guiones(kitchen)
+                Compra_apt.imprimir_guiones(kitchen)
                 kitchen.text(" \n")
 
 
@@ -65,7 +65,7 @@ class GuiaInternaAmp():
 
             return {
                 'message': 'Impresion exitosa'
-            }guia_interna_amp.py
+            }
 
         except Exception as e:
             print(e)

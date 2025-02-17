@@ -76,7 +76,7 @@ class GuiaInternaAmp():
 
             return {
                 'message': 'Impresion exitosa'
-            }guia_interna_amp.py
+            }
 
         except Exception as e:
             print(e)
