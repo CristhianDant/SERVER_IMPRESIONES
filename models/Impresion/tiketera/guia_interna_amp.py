@@ -10,14 +10,15 @@ class GuiaInternaAmp():
         # Imprime un guion bajo "_" 30 veces en la impresora
         kitchen.text("_" * 30 + "\n")
 
-    @staticmethod
-    def process_words(kitchen, words):
-        result = ""
-        for word in words:
-            result += word.upper() + ":"
-        result += "."
-        kitchen.text(result)
-        return result
+    # @staticmethod
+    # def process_words(kitchen, words):
+    #     result = ""
+    #     for word in words:
+    #         codigo_formateado = word[:14].ljust(14)
+    #         cantidad_formateada = ":".ljust(8)
+    #         result += codigo_formateado + cantidad_formateada + '.' * 12 + "\n"
+    #     kitchen.text(result)
+
 
     @staticmethod
     def impresion(ip :str , data:dict) -> bool:
@@ -63,8 +64,11 @@ class GuiaInternaAmp():
 
             lista = ['Alamacen MP', 'Firma', 'Logistica', 'Firma']
 
-            kitchen.text(" \n")
-            GuiaInternaAmp.process_words(kitchen , lista)
+            for resp in lista:
+                kitchen.text(f"{resp}:\n")
+                GuiaInternaAmp.imprimir_guiones(kitchen)
+                kitchen.text(" \n")
+
 
             kitchen.cut()
             kitchen.close()

@@ -37,12 +37,12 @@ def validate_token(token: str) -> Dict[str, Any]:
         raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == "__main__":
-    # data = {
-    #     "sub": "1234567890",
-    #     "name": "John Doe",
-    #     "iat": 1516239022
-    # }
-    # token = create_token(data)
-    # print(token)
-    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MzQxMjk1MTF9.xJaKeZtB1ABKWB6gX-Ve9V4jUliHN23bePfglIV2yhM'
+    data = {
+        "sub": "1234567890",
+        "name": "John Doe",
+        "iat": 1516239022
+    }
+    token = create_token(data)
+    print(token)
+    #token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MzQxMjk1MTF9.xJaKeZtB1ABKWB6gX-Ve9V4jUliHN23bePfglIV2yhM'
     print(validate_token(token))
