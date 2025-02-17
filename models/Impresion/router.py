@@ -100,7 +100,7 @@ def get_impresiones_guia_interna_amp(boby :Dict[str , Any ] = Body(...)):
     ip = boby.get('ip')
     data = boby.get('data')
 
-    result = Compra_apt.impresion(ip=ip, data = data)
+    result = GuiaInternaAmp.impresion(ip=ip, data = data)
 
     return JSONResponse(
         status_code=status.HTTP_200_OK,
