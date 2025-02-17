@@ -10,14 +10,6 @@ class GuiaInternaAmp():
         # Imprime un guion bajo "_" 30 veces en la impresora
         kitchen.text("_" * 30 + "\n")
 
-    # @staticmethod
-    # def process_words(kitchen, words):
-    #     result = ""
-    #     for word in words:
-    #         codigo_formateado = word[:14].ljust(14)
-    #         cantidad_formateada = ":".ljust(8)
-    #         result += codigo_formateado + cantidad_formateada + '.' * 12 + "\n"
-    #     kitchen.text(result)
 
 
     @staticmethod
@@ -28,18 +20,15 @@ class GuiaInternaAmp():
         try:
             kitchen = Network(f'{ip}')
 
-            kitchen.text("GUIA INTERNA-AMP\n")
-            kitchen.text("MateriaPrima - Suministros\n")
+            kitchen.text("COMPRAS\n")
+            kitchen.text("Productos Terminados\n")
             kitchen.text(" \n")
 
             GuiaInternaAmp.imprimir_guiones(kitchen)
 
-            guia = str(encabezado['NROGUIA'])
-            kitchen.text("N° GUIA: " + guia + "\n")
-
             NROSERIE = str(encabezado['NROSERIE'])
             NRODOC = str(encabezado['NRODOC'])
-            kitchen.text("           " + NROSERIE + "-" + NRODOC + "\n")
+            kitchen.text("N° de INGRESO" + NROSERIE + " " + NRODOC + "\n")
 
             FECHA = str(encabezado['HORA_INGRESADO'])
             kitchen.text("FECHA: " + FECHA + "\n")
@@ -47,8 +36,8 @@ class GuiaInternaAmp():
             PROVEDOR = str(encabezado['DESCRIPCION_PROVEEDOR'])
             kitchen.text("PROVEEDOR: " + PROVEDOR + "\n")
 
-            TIPO_COMPRA = str(encabezado['TIPO_COMPRA'])
-            kitchen.text("T.Ingreso: " + TIPO_COMPRA + "\n")
+            TIPO_COMPRA = str(encabezado['TIPODOC'])
+            kitchen.text("FPAGO: " + TIPO_COMPRA + "\n")
 
             GuiaInternaAmp.imprimir_guiones(kitchen)
 
